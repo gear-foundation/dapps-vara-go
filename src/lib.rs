@@ -21,19 +21,24 @@ extern fn handle() {
     // TODO:
     //
     // 1) format checks.
-    // 2) use domain instead of simple data source.
-    // 3) sub paths for this domain.
     // 4) integration with identity interface.
 
     // Just overriding the content atm.
-    state
+    let domain = state
         .entry(payload.domain.clone())
         .or_insert_with(|| Domain {
             owner: sender,
             paths: Default::default(),
-        })
-        .paths
-        .insert(payload.path, payload.src);
+        });
+
+    if domain.owner != sender {
+        // Do nothing atm.
+        //
+        // TODO: Returns the error to the client.
+        return;
+    }
+
+    domain.paths.insert(payload.path, payload.src);
 }
 
 // The `state()` entry point.
