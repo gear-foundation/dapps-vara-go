@@ -38,7 +38,6 @@ pub mod metafns {
     pub fn labels(state: State) -> Vec<String> {
         let mut labels: Vec<String> = state
             .values()
-            .into_iter()
             .map(|s| s.labels.clone())
             .collect::<Vec<Vec<String>>>()
             .into_iter()
