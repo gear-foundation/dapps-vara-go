@@ -7,5 +7,6 @@ use gstd::{Decode, Encode, String, TypeInfo};
 #[scale_info(crate = gstd::scale_info)]
 pub struct HandleInput {
     pub domain: String,
+    pub path: String,
     pub src: Source,
 }

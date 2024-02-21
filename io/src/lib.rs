@@ -6,7 +6,7 @@ mod handler;
 mod source;
 
 pub use handler::HandleInput;
-pub use source::{Content, Footer, Header, Profile, Source, State};
+pub use source::{Content, Domain, Footer, Header, Profile, Source, State};
 
 /// The contract metadata. Used by frontend apps & for describing the types of messages that can be
 /// sent in contract's entry points. See also [`Metadata`].

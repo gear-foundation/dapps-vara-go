@@ -66,17 +66,24 @@ pub struct Source {
 ///
 /// 1) access control for the domain.
 /// 2) enable this interface in the next version.
-#[allow(unused)]
+#[derive(Encode, Decode, TypeInfo, PartialEq, Eq, Debug, Clone)]
+#[codec(crate = gstd::codec)]
+#[scale_info(crate = gstd::scale_info)]
 pub struct Domain {
     /// add a new field for the owner struct.
     ///
     /// - owner: ActorId
     /// - identity: programId.
     pub owner: ActorId,
+
+    /// Subpaths of the domain, for the sub-paths of the sub-paths,
+    /// we can just spliting them with `/`, examples:
+    ///
+    /// - "foo"
+    /// - "foo/bar"
+    /// - ...
     pub paths: BTreeMap<String, Source>,
-    /// people who has edit access to the domain source.
-    pub editors: Vec<ActorId>,
 }
 
 /// Program state.
-pub type State = BTreeMap<String, Source>;
+pub type State = BTreeMap<String, Domain>;

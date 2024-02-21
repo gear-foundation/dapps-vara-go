@@ -15,30 +15,46 @@ pub mod metafns {
     /// - labels
     /// - header title
     /// - content
-    pub fn search(state: State, input: String) -> BTreeMap<String, Source> {
+    pub fn search(state: State, input: String) -> BTreeMap<String, BTreeMap<String, Source>> {
         let tokens: Vec<&str> = input.split_whitespace().collect();
 
+        // TODO: make this iter human readable.
         state
             .iter()
-            .filter_map(|(domain, source)| {
-                if tokens.iter().any(|t| {
-                    domain.contains(t)
-                        || source.labels.iter().any(|l| l.contains(t))
-                        || source.header.title.contains(t)
-                        || source.content.contains(t)
-                }) {
-                    return Some((domain.clone(), source.clone()));
-                }
-                None
+            .map(|(domain, v)| {
+                (
+                    domain.clone(),
+                    v.paths
+                        .iter()
+                        .filter_map(|(path, source)| {
+                            if tokens.iter().any(|t| {
+                                source.labels.iter().any(|l| l.contains(t))
+                                    || source.header.title.contains(t)
+                                    || source.content.contains(t)
+                            }) {
+                                return Some((path.clone(), source.clone()));
+                            }
+                            None
+                        })
+                        .collect(),
+                )
             })
             .collect()
     }
 
     /// List all labels
+    ///
+    /// NOTE: This is for completing the search inputs.
     pub fn labels(state: State) -> Vec<String> {
         let mut labels: Vec<String> = state
             .values()
-            .map(|s| s.labels.clone())
+            .map(|s| {
+                s.paths
+                    .values()
+                    .map(|p| p.labels.clone())
+                    .flatten()
+                    .collect()
+            })
             .collect::<Vec<Vec<String>>>()
             .into_iter()
             .flatten()

@@ -12,6 +12,7 @@ fn test_input() -> HandleInput {
 
     HandleInput {
         domain: "vara-go".to_string(),
+        path: "/".to_string(),
         src: Source {
             labels: vec!["vara-network".to_string()],
             header: Header {
@@ -49,15 +50,21 @@ fn test() {
     // State reading
     //
     let state: State = program.read_state(b"").unwrap();
-    assert_eq!(state.get(&input.domain), Some(input.src.clone()).as_ref());
+    assert_eq!(
+        state.get(&input.domain).unwrap().paths.get(&input.path),
+        Some(input.src.clone()).as_ref()
+    );
 
     // Search competition
     let state_bin = get_state_binary();
     let search = String::from("vara");
-    let output: BTreeMap<String, Source> = program
+    let output: BTreeMap<String, BTreeMap<String, Source>> = program
         .read_state_using_wasm(b"", "search", state_bin, state_args!(search))
         .expect("Failed to search source");
-    assert_eq!(output.get(&input.domain), Some(input.src).as_ref());
+    assert_eq!(
+        output.get(&input.domain).unwrap().get(&input.path),
+        Some(input.src).as_ref()
+    );
 }
 
 #[allow(unused)]
