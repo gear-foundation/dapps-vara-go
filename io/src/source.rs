@@ -1,4 +1,4 @@
-use gstd::{collections::BTreeMap, Decode, Encode, String, TypeInfo};
+use gstd::{collections::BTreeMap, Decode, Encode, String, TypeInfo, Vec};
 
 /// Profile of the content
 #[derive(Encode, Decode, TypeInfo, PartialEq, Eq, Debug)]
@@ -35,7 +35,7 @@ pub enum Content {
 #[scale_info(crate = gstd::scale_info)]
 pub struct Footer {
     /// Centered information in footer.
-    info: String,
+    pub info: String,
 }
 
 /// Source of the page.
@@ -43,9 +43,11 @@ pub struct Footer {
 #[codec(crate = gstd::codec)]
 #[scale_info(crate = gstd::scale_info)]
 pub struct Source {
-    header: Header,
-    content: Content,
-    footer: Footer,
+    /// Labels for querying the pages.
+    pub labels: Vec<String>,
+    pub header: Header,
+    pub content: Content,
+    pub footer: Footer,
 }
 
 /// Program state.
