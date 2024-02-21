@@ -5,7 +5,7 @@ use gmeta::{In, Metadata, Out};
 mod handler;
 mod source;
 
-pub use handler::{HandleInput, HandleOutput};
+pub use handler::HandleInput;
 pub use source::{Content, Footer, Header, Profile, Source, State};
 
 /// The contract metadata. Used by frontend apps & for describing the types of messages that can be
