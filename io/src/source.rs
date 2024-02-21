@@ -29,6 +29,16 @@ pub enum Content {
     Markdown(String),
 }
 
+impl Content {
+    /// If the content contains the token.
+    pub fn contains(&self, token: &str) -> bool {
+        match self {
+            Content::Profile(profile) => profile.title.contains(token),
+            Content::Markdown(markdown) => markdown.contains(token),
+        }
+    }
+}
+
 /// Footer abstraction.
 #[derive(Encode, Decode, TypeInfo, PartialEq, Eq, Debug, Default, Clone)]
 #[codec(crate = gstd::codec)]

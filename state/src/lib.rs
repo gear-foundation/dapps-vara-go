@@ -1,22 +1,42 @@
 #![no_std]
 
-use gstd::{prelude::*, ActorId};
+use gstd::{collections::BTreeMap, prelude::*};
 use template_io::*;
 
 #[gmeta::metawasm]
 pub mod metafns {
     pub type State = template_io::State;
 
-    /// Returns the full state on development purposes.
-    pub fn dev(state: State) -> State {
+    /// Returns all domains (pages) that matches the search input.
+    ///
+    /// For the source of the competition:
+    /// - domain name
+    /// - labels
+    /// - header title
+    /// - content
+    pub fn search(state: State, input: String) -> BTreeMap<String, Source> {
+        let tokens: Vec<&str> = input.split_whitespace().collect();
+
         state
+            .iter()
+            .filter_map(|(domain, source)| {
+                if tokens.iter().any(|t| {
+                    domain.contains(t)
+                        || source.labels.iter().any(|l| l.contains(t))
+                        || source.header.title.contains(t)
+                        || source.content.contains(t)
+                }) {
+                    return Some((domain.clone(), source.clone()));
+                }
+                None
+            })
+            .collect()
     }
 
     // TODO:
     //
-    // 1) Search completations from the input labels, recommended domains / pages.
-    // 2) list subpages of a domain.
-    // 3)
+    // 1) list subpages of a domain.
+    // 2)
 
     // pub fn query(state: State, query: StateQuery) -> StateQueryReply {
     //     match query {

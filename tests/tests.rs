@@ -1,5 +1,5 @@
 use gstd::{collections::BTreeMap, prelude::*};
-use gtest::{Program, System};
+use gtest::{state_args, Program, System};
 use std::fs;
 use template_io::*;
 
@@ -41,13 +41,23 @@ fn test() {
     let mut result = program.send_bytes(2, []);
     assert!(!result.main_failed());
 
-    // Send the test handle input.
+    // Send the test the handle input.
     result = program.send(0, input.clone());
     assert!(!result.main_failed());
 
+    //
     // State reading
+    //
     let state: State = program.read_state(b"").unwrap();
-    assert_eq!(state.get(&input.domain), Some(input.src).as_ref());
+    assert_eq!(state.get(&input.domain), Some(input.src.clone()).as_ref());
+
+    // Search competition
+    let state_bin = get_state_binary();
+    let search = String::from("vara");
+    let output: BTreeMap<String, Source> = program
+        .read_state_using_wasm(b"", "search", state_bin, state_args!(search))
+        .expect("Failed to search source");
+    assert_eq!(output.get(&input.domain), Some(input.src).as_ref());
 }
 
 #[allow(unused)]
