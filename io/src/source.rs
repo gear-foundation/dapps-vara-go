@@ -1,4 +1,4 @@
-use gstd::{collections::BTreeMap, Decode, Encode, String, TypeInfo, Vec};
+use gstd::{collections::BTreeMap, ActorId, Decode, Encode, String, TypeInfo, Vec};
 
 /// Profile of the content
 #[derive(Encode, Decode, TypeInfo, PartialEq, Eq, Debug, Default, Clone)]
@@ -58,6 +58,20 @@ pub struct Source {
     pub header: Header,
     pub content: Content,
     pub footer: Footer,
+}
+
+/// Domain of pages.
+///
+/// TODO:
+///
+/// 1) access control for the domain.
+/// 2) enable this interface in the next version.
+#[allow(unused)]
+pub struct Domain {
+    pub owner: ActorId,
+    pub paths: BTreeMap<String, Source>,
+    /// people who has edit access to the domain source.
+    pub editors: Vec<ActorId>,
 }
 
 /// Program state.
