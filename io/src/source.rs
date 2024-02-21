@@ -1,7 +1,7 @@
 use gstd::{collections::BTreeMap, Decode, Encode, String, TypeInfo, Vec};
 
 /// Profile of the content
-#[derive(Encode, Decode, TypeInfo, PartialEq, Eq, Debug)]
+#[derive(Encode, Decode, TypeInfo, PartialEq, Eq, Debug, Default, Clone)]
 #[codec(crate = gstd::codec)]
 #[scale_info(crate = gstd::scale_info)]
 pub struct Profile {
@@ -10,7 +10,7 @@ pub struct Profile {
 }
 
 /// The header of the page.
-#[derive(Encode, Decode, TypeInfo, PartialEq, Eq, Debug)]
+#[derive(Encode, Decode, TypeInfo, PartialEq, Eq, Debug, Default, Clone)]
 #[codec(crate = gstd::codec)]
 #[scale_info(crate = gstd::scale_info)]
 pub struct Header {
@@ -21,7 +21,7 @@ pub struct Header {
 }
 
 /// Source of the content
-#[derive(Encode, Decode, TypeInfo, PartialEq, Eq, Debug)]
+#[derive(Encode, Decode, TypeInfo, PartialEq, Eq, Debug, Clone)]
 #[codec(crate = gstd::codec)]
 #[scale_info(crate = gstd::scale_info)]
 pub enum Content {
@@ -30,7 +30,7 @@ pub enum Content {
 }
 
 /// Footer abstraction.
-#[derive(Encode, Decode, TypeInfo, PartialEq, Eq, Debug)]
+#[derive(Encode, Decode, TypeInfo, PartialEq, Eq, Debug, Default, Clone)]
 #[codec(crate = gstd::codec)]
 #[scale_info(crate = gstd::scale_info)]
 pub struct Footer {
@@ -39,7 +39,7 @@ pub struct Footer {
 }
 
 /// Source of the page.
-#[derive(Encode, Decode, TypeInfo, PartialEq, Eq, Debug)]
+#[derive(Encode, Decode, TypeInfo, PartialEq, Eq, Debug, Clone)]
 #[codec(crate = gstd::codec)]
 #[scale_info(crate = gstd::scale_info)]
 pub struct Source {
@@ -51,4 +51,4 @@ pub struct Source {
 }
 
 /// Program state.
-pub type State = BTreeMap<String, Profile>;
+pub type State = BTreeMap<String, Source>;

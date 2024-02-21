@@ -21,9 +21,12 @@ extern fn handle() {
 
     let state = unsafe { STATE.as_mut().expect("State isn't initialized") };
 
-    // TODO: duplicated domain checks.
-    state.insert(payload.id, payload.src);
-
+    // TODO:
+    //
+    // 1) format checks.
+    // 2) insert domain into registry
+    // 3) sub routes for this domain.
+    state.insert(payload.domain, payload.src);
     msg::reply(HandleOutput::Success, 0).expect("Failed to reply from `handle()`");
 }
 
