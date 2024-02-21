@@ -1,9 +1,9 @@
 #![no_std]
 
-use gstd::{collections::HashMap, msg, prelude::*, ActorId};
+use gstd::{collections::BTreeMap, msg, prelude::*, ActorId};
 use template_io::*;
 
-static mut STATE: Option<HashMap<ActorId, u128>> = None;
+static mut STATE: Option<BTreeMap<String, Source>> = None;
 
 // The `init()` entry point.
 #[no_mangle]
@@ -14,17 +14,18 @@ extern fn init() {
 // The `handle()` entry point.
 #[no_mangle]
 extern fn handle() {
-    let payload = msg::load().expect("Failed to load payload");
+    let Some(payload) = msg::load() else {
+        msg::reply(HandleOutput::InvalidPayload, 1).expect("Failed to reply from `handle()`");
+        return;
+    };
 
-    if let PingPong::Ping = payload {
-        let pingers = unsafe { STATE.as_mut().expect("State isn't initialized") };
+    if let HandleInput { id, src } = payload {
+        let state = unsafe { STATE.as_mut().expect("State isn't initialized") };
 
-        pingers
-            .entry(msg::source())
-            .and_modify(|ping_count| *ping_count = ping_count.saturating_add(1))
-            .or_insert(1);
+        // TODO: duplicated domain checks.
+        state.insert(id, src);
 
-        msg::reply(PingPong::Pong, 0).expect("Failed to reply from `handle()`");
+        msg::reply(HandleOutput::Success, 0).expect("Failed to reply from `handle()`");
     }
 }
 
