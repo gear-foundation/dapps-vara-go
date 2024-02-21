@@ -27,7 +27,7 @@ impl Metadata for ContractMetadata {
     type Signal = ();
     /// I/O types for the `state()` entry point.
     ///
-    /// You can also specify just an output ([`Out`]) or input ([`In`](gmeta::In)) type, if both
-    /// ([`InOut`]) are expected like here.
+    /// You can also specify just an output ([`Out`]) or input ([`In`]) type, if both
+    /// ([`In`]) are expected like here.
     type State = Out<State>;
 }
