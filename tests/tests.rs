@@ -15,15 +15,15 @@ fn test_input() -> HandleInput {
         src: Source {
             labels: vec!["vara-network".to_string()],
             header: Header {
-                title: "title".to_string(),
+                title: "vara-go".to_string(),
                 logo: None,
             },
             content: Content::Profile(Profile {
-                title: "title".to_string(),
+                title: "Vara".to_string(),
                 links,
             }),
             footer: Footer {
-                info: "info".to_string(),
+                info: "I'm footer".to_string(),
             },
         },
     }
@@ -62,5 +62,5 @@ fn test() {
 
 #[allow(unused)]
 fn get_state_binary() -> Vec<u8> {
-    fs::read("target/wasm32-unknown-unknown/release/template_state.meta.wasm").unwrap()
+    fs::read("target/wasm32-unknown-unknown/debug/template_state.meta.wasm").unwrap()
 }
