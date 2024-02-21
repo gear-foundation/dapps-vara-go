@@ -22,6 +22,7 @@ extern fn handle() {
     // 1) format checks.
     // 2) use domain instead of simple data source.
     // 3) sub paths for this domain.
+    // 4) integration with identity interface.
     state.insert(payload.domain, payload.src);
 }
 

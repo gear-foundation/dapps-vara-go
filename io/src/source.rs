@@ -25,6 +25,7 @@ pub struct Header {
 #[codec(crate = gstd::codec)]
 #[scale_info(crate = gstd::scale_info)]
 pub enum Content {
+    // TODO: use demo-identity instead.
     Profile(Profile),
     Markdown(String),
 }
@@ -67,6 +68,10 @@ pub struct Source {
 /// 2) enable this interface in the next version.
 #[allow(unused)]
 pub struct Domain {
+    /// add a new field for the owner struct.
+    ///
+    /// - owner: ActorId
+    /// - identity: programId.
     pub owner: ActorId,
     pub paths: BTreeMap<String, Source>,
     /// people who has edit access to the domain source.
