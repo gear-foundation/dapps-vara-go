@@ -53,7 +53,6 @@ pub struct Footer {
 #[codec(crate = gstd::codec)]
 #[scale_info(crate = gstd::scale_info)]
 pub struct Source {
-    /// Labels for querying the pages.
     pub labels: Vec<String>,
     pub header: Header,
     pub content: Content,

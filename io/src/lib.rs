@@ -1,6 +1,6 @@
 #![no_std]
 
-use gmeta::{InOut, Metadata, Out};
+use gmeta::{In, Metadata, Out};
 
 mod handler;
 mod source;
@@ -18,9 +18,7 @@ impl Metadata for ContractMetadata {
     /// I/O types for the `init()` entry point.
     type Init = ();
     /// I/O types for the `handle()` entry point.
-    ///
-    /// Here the [`PingPong`] type is used for both incoming and outgoing messages.
-    type Handle = InOut<HandleInput, HandleOutput>;
+    type Handle = In<HandleInput>;
     /// Types for miscellaneous scenarios.
     type Others = ();
     /// The input type for the `handle_reply()` entry point.

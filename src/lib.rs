@@ -14,20 +14,15 @@ extern fn init() {
 // The `handle()` entry point.
 #[no_mangle]
 extern fn handle() {
-    let Ok(payload) = msg::load::<HandleInput>() else {
-        msg::reply(HandleOutput::InvalidPayload, 1).expect("Failed to reply from `handle()`");
-        return;
-    };
-
+    let payload = msg::load::<HandleInput>().expect("Invalid payload");
     let state = unsafe { STATE.as_mut().expect("State isn't initialized") };
 
     // TODO:
     //
     // 1) format checks.
-    // 2) insert domain into registry
-    // 3) sub routes for this domain.
+    // 2) use domain instead of simple data source.
+    // 3) sub paths for this domain.
     state.insert(payload.domain, payload.src);
-    msg::reply(HandleOutput::Success, 0).expect("Failed to reply from `handle()`");
 }
 
 // The `state()` entry point.
