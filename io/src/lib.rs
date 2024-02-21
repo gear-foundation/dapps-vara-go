@@ -1,13 +1,12 @@
 #![no_std]
 
 use gmeta::{InOut, Metadata, Out};
-use gstd::{prelude::*, ActorId};
 
 mod handler;
 mod source;
 
 pub use handler::{HandleInput, HandleOutput};
-pub use source::Source;
+pub use source::{Source, State};
 
 /// The contract metadata. Used by frontend apps & for describing the types of messages that can be
 /// sent in contract's entry points. See also [`Metadata`].

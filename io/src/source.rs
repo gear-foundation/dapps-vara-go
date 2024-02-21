@@ -1,4 +1,4 @@
-use std::collections::BTreeMap;
+use gstd::{collections::BTreeMap, Decode, Encode, String, TypeInfo};
 
 /// Profile of the content
 #[derive(Encode, Decode, TypeInfo, PartialEq, Eq, Debug)]

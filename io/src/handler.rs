@@ -1,4 +1,5 @@
 use crate::Source;
+use gstd::{Decode, Encode, String, TypeInfo};
 
 /// The input for the `handle` entry point.
 #[derive(Encode, Decode, TypeInfo, PartialEq, Eq, Debug)]
