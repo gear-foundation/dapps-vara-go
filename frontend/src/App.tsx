@@ -6,6 +6,8 @@ import { Main } from "./features/main/components/Main";
 import { SearchResults } from "./features/search/components/SearchResults";
 import { Header } from "./components/Header";
 import { SearchedMurkup } from "./features/search/components/SearchedMurkup";
+import { useReadWasmState } from "@gear-js/react-hooks";
+import { useWasmState } from "./hooks";
 
 const Component = () => {
   return (

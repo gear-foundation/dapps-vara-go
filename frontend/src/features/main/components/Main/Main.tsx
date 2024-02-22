@@ -3,11 +3,12 @@ import { SearchInput } from "@/components/SearchInput";
 import styles from "./Main.module.scss";
 import varaMainLogo from "@/assets/icons/logo-vara-go.png";
 import { SEARCH_ATOM } from "../../atoms";
-
-const tags = ["Vara", "Travel", "Apple", "Crypto", "Internet"];
+import { useWasmState } from "@/hooks";
 
 export const Main = () => {
   const setVal = useSetAtom(SEARCH_ATOM);
+  const { state } = useWasmState("labels", null);
+  const tags = state as any[];
 
   const handleTagClick = (tag: string) => {
     setVal(tag);
@@ -20,7 +21,7 @@ export const Main = () => {
       <div className={styles.predefinedTagsWrapper}>
         <h4 className={styles.heading}>Predefined tags...</h4>
         <div className={styles.predefinedTags}>
-          {tags.map((item) => (
+          {tags?.map((item) => (
             <button className={styles.tag} onClick={() => handleTagClick(item)}>
               {item}
             </button>
