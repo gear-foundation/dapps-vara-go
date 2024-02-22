@@ -1,10 +1,10 @@
-import { Button } from '@gear-js/vara-ui';
-import { useAccount } from '@gear-js/react-hooks';
-import { useEffect, useState } from 'react';
-import { AccountButton } from '../account-button';
-import { WalletModal } from '../wallet-modal';
-import styles from './wallet.module.css';
-import { VaraBalance } from '../vara-balance';
+import { Button } from "@gear-js/vara-ui";
+import { useAccount } from "@gear-js/react-hooks";
+import { useEffect, useState } from "react";
+import { AccountButton } from "../account-button";
+import { WalletModal } from "../wallet-modal";
+import styles from "./wallet.module.css";
+import { VaraBalance } from "../vara-balance";
 
 export type ClassNameProps = {
   balance?: string;
@@ -31,18 +31,31 @@ function Wallet({ isWalletModalOpen, walletModalHandler, className }: Props) {
   return isAccountReady ? (
     <>
       <div className={styles.wallet}>
-        <VaraBalance className={className?.balance} />
+        {/* <VaraBalance className={className?.balance} /> */}
 
         {account ? (
           <div className={styles.accountButton}>
-            <AccountButton address={account.address} name={account.meta.name} onClick={openModal} />
+            <AccountButton
+              address={account.address}
+              name={account.meta.name}
+              onClick={openModal}
+            />
           </div>
         ) : (
-          <Button text="Connect Wallet" color="primary" className={styles.connectButton} onClick={openModal} />
+          <Button
+            text="Connect Wallet"
+            color="primary"
+            className={styles.connectButton}
+            onClick={openModal}
+          />
         )}
       </div>
 
-      <WalletModal onClose={closeModal} open={isModalOpen} setOpen={openModal} />
+      <WalletModal
+        onClose={closeModal}
+        open={isModalOpen}
+        setOpen={openModal}
+      />
     </>
   ) : null;
 }

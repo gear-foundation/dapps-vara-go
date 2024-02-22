@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { ReactComponent as DonateSVG } from "@/assets/icons/donate.svg";
 import { ReactComponent as BurgerMenuSVG } from "@/assets/icons/burger-menu.svg";
 import { ReactComponent as CrossIconSVG } from "@/assets/icons/cross-icon.svg";
 import varaMainLogo from "@/assets/icons/logo-vara-go.png";
@@ -32,6 +33,9 @@ export const Header = () => {
       </Link>
       <SearchInput />
       <div className={styles.headerRight}>
+        <button className={styles.donateButton}>
+          <DonateSVG /> DONATE
+        </button>
         <Wallet />
         <button className={styles.rightButton}>
           {isMenuOpen ? (
