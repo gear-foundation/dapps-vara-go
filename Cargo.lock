@@ -6287,6 +6287,7 @@ dependencies = [
  "alpha-io",
  "gear-wasm-builder",
  "gstd",
+ "gtest",
 ]
 
 [[package]]

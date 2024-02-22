@@ -8,7 +8,11 @@ static mut STATE: Option<State> = None;
 
 // do nothing atm.
 #[no_mangle]
-extern fn init() {}
+extern fn init() {
+    unsafe {
+        STATE = Some(vec![]);
+    }
+}
 
 // The `handle()` entry point.
 #[no_mangle]

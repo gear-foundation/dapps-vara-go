@@ -12,7 +12,7 @@ pub mod metafns {
         Label::list()
     }
 
-    /// Search all resouces matching labels
+    /// Search all resouces matching the input label.
     pub fn search(state: State, label: Label) -> Vec<Resource> {
         state
             .into_iter()

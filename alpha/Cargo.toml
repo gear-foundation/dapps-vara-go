@@ -8,6 +8,9 @@ publish.workspace = true
 gstd.workspace = true
 alpha-io.workspace = true
 
+[dev-dependencies]
+gtest.workspace = true
+
 [build-dependencies]
 alpha-io.workspace = true
 gear-wasm-builder.workspace = true

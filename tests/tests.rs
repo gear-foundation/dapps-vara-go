@@ -60,7 +60,6 @@ fn test() {
     assert_eq!(output.get(&input.domain), Some(input.src).as_ref());
 }
 
-#[allow(unused)]
 fn get_state_binary() -> Vec<u8> {
     fs::read("target/wasm32-unknown-unknown/debug/template_state.meta.wasm").unwrap()
 }
