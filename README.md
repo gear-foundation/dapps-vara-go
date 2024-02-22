@@ -1,3 +1,6 @@
+## Vara.GO
+Decentralized almost free-to-use intern marketing sendbox for the websites.
+
 ## Deployment
 
 1. Deploy the code of [program domain](./domain) 
