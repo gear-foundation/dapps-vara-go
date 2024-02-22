@@ -1,19 +1,22 @@
 #![no_std]
 
-use alpha_io::{Resource, State};
+use alpha_io::{Label, Resource};
 use gstd::prelude::*;
 
 #[gmeta::metawasm]
 pub mod metafns {
-    pub type State = State;
+    pub type State = alpha_io::State;
 
     /// Returns all domains (pages) that matches the search input.
-    pub fn labels(state: State) -> Vec<Label> {
+    pub fn labels(_state: State) -> Vec<Label> {
         Label::list()
     }
 
     /// Search all resouces matching labels
     pub fn search(state: State, label: Label) -> Vec<Resource> {
-        state.iter().filter(|s| s.labels.contains(label)).collect()
+        state
+            .into_iter()
+            .filter(|s| s.labels.contains(&label))
+            .collect()
     }
 }
