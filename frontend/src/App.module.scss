@@ -1,0 +1,13 @@
+
+
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.searchBox {
+  overflow-y: auto;
+  flex: 1;
+}
