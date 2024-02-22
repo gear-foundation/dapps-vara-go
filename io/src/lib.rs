@@ -1,12 +1,11 @@
 #![no_std]
 
 use gmeta::{In, Metadata, Out};
+pub use router::{Command, InitInput, Router};
+pub use source::{Footer, Header, Source, State};
 
-mod handler;
+mod router;
 mod source;
-
-pub use handler::HandleInput;
-pub use source::{Content, Footer, Header, Profile, Source, State};
 
 /// The contract metadata. Used by frontend apps & for describing the types of messages that can be
 /// sent in contract's entry points. See also [`Metadata`].
@@ -16,9 +15,9 @@ pub struct ContractMetadata;
 /// doesn't implement it.
 impl Metadata for ContractMetadata {
     /// I/O types for the `init()` entry point.
-    type Init = ();
+    type Init = In<InitInput>;
     /// I/O types for the `handle()` entry point.
-    type Handle = In<HandleInput>;
+    type Handle = In<Command>;
     /// Types for miscellaneous scenarios.
     type Others = ();
     /// The input type for the `handle_reply()` entry point.
@@ -29,5 +28,5 @@ impl Metadata for ContractMetadata {
     ///
     /// You can also specify just an output ([`Out`]) or input ([`In`]) type, if both
     /// ([`In`]) are expected like here.
-    type State = Out<State>;
+    type State = Out<Router>;
 }

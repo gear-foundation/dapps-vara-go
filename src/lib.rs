@@ -1,29 +1,81 @@
 #![no_std]
 
-use gstd::{collections::BTreeMap, msg, prelude::*};
+use gstd::{msg, prelude::*, prog, ActorId, CodeId};
 use template_io::*;
 
-static mut STATE: Option<BTreeMap<String, Source>> = None;
+/// The code id of the domain program.
+static mut DOMAIN_CODE_ID: Option<CodeId> = None;
 
-// The `init()` entry point.
+/// The code id of the identity program.
+static mut IDENTITY_CODE_ID: Option<CodeId> = None;
+
+/// The resource of the domain.
+static mut STATE: Option<Router> = None;
+
+// Init handler for the factory program.
 #[no_mangle]
 extern fn init() {
-    unsafe { STATE = Some(Default::default()) }
+    let payload: InitInput = msg::load().expect("Failed to load handle input");
+
+    unsafe {
+        *DOMAIN_CODE_ID
+            .as_mut()
+            .expect("Failed to get domain storage") = payload.domain;
+        *IDENTITY_CODE_ID
+            .as_mut()
+            .expect("Failed to get identity storage") = payload.identity;
+    }
 }
 
-// The `handle()` entry point.
+fn domain_salt(sender: ActorId, domain: String) -> Vec<u8> {
+    [sender.as_ref().to_vec(), domain.into_bytes().to_vec()].concat()
+}
+
+// TODO:
+//
+// Write methods:
+//
+// 1. create a new domain
+// 2. create an identity
+// 3. update a domain
+// 4. update the identity
+//
+// Read methods:
+//
+// 1. Search domains
 #[no_mangle]
 extern fn handle() {
-    let payload = msg::load::<HandleInput>().expect("Invalid payload");
-    let state = unsafe { STATE.as_mut().expect("State isn't initialized") };
+    let payload: Command = msg::load().expect("Failed to load handle input");
+    let sender = msg::source();
 
-    // TODO:
-    //
-    // 1) format checks.
-    // 2) use domain instead of simple data source.
-    // 3) sub paths for this domain.
-    // 4) integration with identity interface.
-    state.insert(payload.domain, payload.src);
+    match payload {
+        Command::CreateDomain(config) => {
+            let code_id = unsafe { DOMAIN_CODE_ID.clone().expect("code id not exist") };
+
+            let (_, pid) = prog::create_program(
+                code_id,
+                domain_salt(sender, config.domain.clone()),
+                config.source,
+                0,
+            )
+            .expect("Failed to create domain");
+
+            unsafe {
+                STATE
+                    .as_mut()
+                    .expect("Failed to load program state")
+                    .create_domain(config.domain, pid)
+            }
+        }
+        Command::AddLabels(config) => unsafe {
+            // TODO: admin checks
+
+            STATE
+                .as_mut()
+                .expect("Failed to load program state")
+                .add_labels(config.domain, config.labels)
+        },
+    }
 }
 
 // The `state()` entry point.
