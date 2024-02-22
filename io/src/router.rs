@@ -21,6 +21,7 @@ pub struct InitInput {
 #[scale_info(crate = gstd::scale_info)]
 pub enum Command {
     CreateDomain(CommandCreateDomain),
+    AddLabels(CommandAddLabels),
     // TODO:
     //
     // CreateIdentity,
@@ -35,6 +36,17 @@ pub struct CommandCreateDomain {
     pub domain: String,
     /// The source of the domain.
     pub source: Source,
+}
+
+/// Add labels for domain
+#[derive(Encode, Decode, TypeInfo, PartialEq, Eq, Debug, Clone)]
+#[codec(crate = gstd::codec)]
+#[scale_info(crate = gstd::scale_info)]
+pub struct CommandAddLabels {
+    /// The domain to add labels.
+    pub domain: String,
+    /// labels of the domain.
+    pub labels: Vec<Label>,
 }
 
 // TODO:
@@ -78,5 +90,11 @@ impl Router {
                 labels: Default::default(),
             },
         );
+    }
+
+    /// Add labels to a domain.
+    pub fn add_labels(&mut self, domain: String, labels: Vec<Label>) {
+        let meta = self.0.get_mut(&domain).expect("Domain not found");
+        meta.labels.extend(labels);
     }
 }

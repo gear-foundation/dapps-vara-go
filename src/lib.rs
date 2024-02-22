@@ -67,6 +67,14 @@ extern fn handle() {
                     .create_domain(config.domain, pid)
             }
         }
+        Command::AddLabels(config) => unsafe {
+            // TODO: admin checks
+
+            STATE
+                .as_mut()
+                .expect("Failed to load program state")
+                .add_labels(config.domain, config.labels)
+        },
     }
 }
 
