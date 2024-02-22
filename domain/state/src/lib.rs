@@ -1,6 +1,6 @@
 #![no_std]
 
-use gstd::{collections::BTreeMap, prelude::*, ActorId, Vec};
+use gstd::prelude::*;
 
 #[gmeta::metawasm]
 pub mod metafns {
