@@ -1,12 +1,10 @@
 #![no_std]
 
 use gmeta::{In, Metadata, Out};
+use gstd::String;
+pub use source::{Footer, Header, Source, State};
 
-mod handler;
 mod source;
-
-pub use handler::HandleInput;
-pub use source::{Content, Footer, Header, Profile, Source, State};
 
 /// The contract metadata. Used by frontend apps & for describing the types of messages that can be
 /// sent in contract's entry points. See also [`Metadata`].
@@ -16,9 +14,9 @@ pub struct ContractMetadata;
 /// doesn't implement it.
 impl Metadata for ContractMetadata {
     /// I/O types for the `init()` entry point.
-    type Init = ();
+    type Init = In<String>;
     /// I/O types for the `handle()` entry point.
-    type Handle = In<HandleInput>;
+    type Handle = In<Source>;
     /// Types for miscellaneous scenarios.
     type Others = ();
     /// The input type for the `handle_reply()` entry point.

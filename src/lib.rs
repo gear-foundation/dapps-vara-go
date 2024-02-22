@@ -1,29 +1,37 @@
 #![no_std]
 
-use gstd::{collections::BTreeMap, msg, prelude::*};
+use gstd::{msg, prelude::*, ActorId};
 use template_io::*;
 
-static mut STATE: Option<BTreeMap<String, Source>> = None;
+/// Admin of this domain.
+static mut ADMIN: ActorId = ActorId::zero();
+
+/// The resource of the domain.
+static mut STATE: Option<State> = None;
 
 // The `init()` entry point.
 #[no_mangle]
 extern fn init() {
-    unsafe { STATE = Some(Default::default()) }
+    unsafe { ADMIN = msg::source() }
+    unsafe { STATE = None }
+
+    // TODO:
+    //
+    // register domain to the router.
+    //
+    // let domain = msg::load::<String>().expect("Invalid payload");
 }
 
 // The `handle()` entry point.
 #[no_mangle]
 extern fn handle() {
-    let payload = msg::load::<HandleInput>().expect("Invalid payload");
+    let source = msg::load::<Source>().expect("Invalid payload");
     let state = unsafe { STATE.as_mut().expect("State isn't initialized") };
+    *state = source;
 
     // TODO:
     //
-    // 1) format checks.
-    // 2) use domain instead of simple data source.
-    // 3) sub paths for this domain.
-    // 4) integration with identity interface.
-    state.insert(payload.domain, payload.src);
+    // register labels to the router
 }
 
 // The `state()` entry point.
