@@ -4,7 +4,7 @@ import styles from "./Main.module.scss";
 import varaMainLogo from "@/assets/icons/logo-vara-go.png";
 import { SEARCH_ATOM } from "../../atoms";
 
-const tags = ["apple", "banana", "qiwi", "orange", "pineapple"];
+const tags = ["Vara", "Travel", "Apple", "Crypto", "Internet"];
 
 export const Main = () => {
   const setVal = useSetAtom(SEARCH_ATOM);

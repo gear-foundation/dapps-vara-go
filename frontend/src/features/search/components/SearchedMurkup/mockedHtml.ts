@@ -1,4 +1,5 @@
 export const mocked = `
+<div class="app__content">
     <div class="app__content__left">
     <header class="app__content__left__header">
       <ul class="app__content__left__header__menu">
@@ -39,4 +40,35 @@ export const mocked = `
       alt="mockedPic"
       class="app__content__right__picture"
     />
-  </div>`;
+  </div></div>`;
+
+export const mocked1 = `   <header class="header">
+<h1 class="header-title">My Travel Blog</h1>
+</header>
+
+<main class="main-content">
+
+<article class="post">
+
+  <h2 class="post-title">My Trip to Paris</h2>
+
+  <div class="post-content">
+  
+    <p class="post-intro">Last month I took a trip to the beautiful city of Paris. It was my first time visiting and I had an amazing time exploring the city.</p>
+  
+    <p class="post-details">Some of the highlights included:</p>
+  
+    <ul class="post-list">
+      <!-- list items -->
+    </ul>
+  
+    <p class="post-description">The food was also incredible - I enjoyed delicious croissants, baguettes, pastries and cheese every day. The French truly know how to eat well!</p>
+  
+    <p class="post-conclusion">Overall it was a very memorable trip and I can't wait to return to Paris again soon to discover more of what this city has to offer.</p>
+
+  </div>
+  
+</article>
+
+</main>
+`;
