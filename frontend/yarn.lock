@@ -1335,12 +1335,12 @@
   resolved "https://registry.yarnpkg.com/@eslint/js/-/js-8.56.0.tgz#ef20350fec605a7f7035a01764731b2de0f3782b"
   integrity sha512-gMsVel9D7f2HLkBma9VbtzZRehRogVRfbr++f06nL2vnCGCNlzOD+/MUov/F4p8myyAHspEhVobgjpX64q5m6A==
 
-"@gear-js/api@^0.36.6":
+"@gear-js/api@0.36.6":
   version "0.36.6"
   resolved "https://registry.yarnpkg.com/@gear-js/api/-/api-0.36.6.tgz#7c00d785c52b612d1e11d7635d6ff1e0b667af47"
   integrity sha512-GCnJY3zcvTEW9FQ6skc2ixfxkaBGry+h2PMg8KF2Y5Hskt5lwFfrbM21e7t5Dirx3hE9oedTMFtvWPK4SF1qpg==
 
-"@gear-js/react-hooks@^0.10.3":
+"@gear-js/react-hooks@0.10.3":
   version "0.10.3"
   resolved "https://registry.yarnpkg.com/@gear-js/react-hooks/-/react-hooks-0.10.3.tgz#148054edda6bb0071a9fea4b4fb0e6b6898a11a6"
   integrity sha512-KmMszAEXoSAevXMi+iAFZ6yWjDnVURtOu4ovn6FKB1rorEnL8P+anG8KnUQXiHj8CzSE9otYkmtvaXUXV+LZkA==

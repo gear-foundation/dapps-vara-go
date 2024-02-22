@@ -18,10 +18,6 @@ export const SearchedMurkup = () => {
   const setSearchValue = useSetAtom(SEARCH_ATOM);
   // const [searchedTemplate, setSearchedTemplate] = useState<string>(mocked);
 
-  useEffect(() => {
-    setSearchValue("");
-  }, []);
-
   const defineStyles = (id: string | undefined) => {
     if (id === "vara.kara-blog") {
       return st;
