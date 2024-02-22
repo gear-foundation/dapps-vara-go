@@ -1,13 +1,4 @@
-use gstd::{collections::BTreeMap, Decode, Encode, String, TypeInfo, Vec};
-
-/// Profile of the content
-#[derive(Encode, Decode, TypeInfo, PartialEq, Eq, Debug, Default, Clone)]
-#[codec(crate = gstd::codec)]
-#[scale_info(crate = gstd::scale_info)]
-pub struct Profile {
-    pub title: String,
-    pub links: BTreeMap<String, String>,
-}
+use gstd::{Decode, Encode, String, TypeInfo};
 
 /// The header of the page.
 #[derive(Encode, Decode, TypeInfo, PartialEq, Eq, Debug, Default, Clone)]
@@ -34,7 +25,6 @@ pub struct Footer {
 #[codec(crate = gstd::codec)]
 #[scale_info(crate = gstd::scale_info)]
 pub struct Source {
-    pub labels: Vec<String>,
     pub header: Header,
     pub content: String,
     pub footer: Footer,

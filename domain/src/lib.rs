@@ -7,7 +7,7 @@ use template_io::*;
 static mut ADMIN: ActorId = ActorId::zero();
 
 /// The resource of the domain.
-static mut STATE: Option<State> = None;
+static mut STATE: Option<Source> = None;
 
 // The `init()` entry point.
 #[no_mangle]

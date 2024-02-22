@@ -62,7 +62,18 @@ pub struct CommandAddLabels {
 #[scale_info(crate = gstd::scale_info)]
 pub enum Label {
     Vara,
+    Football,
     Profile,
+}
+
+impl AsRef<str> for Label {
+    fn as_ref(&self) -> &str {
+        match self {
+            Label::Vara => "vara",
+            Label::Football => "football",
+            Label::Profile => "profile",
+        }
+    }
 }
 
 /// Metadata of domain.
@@ -72,6 +83,12 @@ pub enum Label {
 pub struct DomainMeta {
     pub labels: Vec<Label>,
     pub pid: ActorId,
+}
+
+impl DomainMeta {
+    pub fn labels(&self) -> Vec<&str> {
+        self.labels.iter().map(|l| l.as_ref()).collect()
+    }
 }
 
 /// Router state
