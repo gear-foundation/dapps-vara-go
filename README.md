@@ -1,47 +1,19 @@
-[![Open in Gitpod](https://img.shields.io/badge/Open_in-Gitpod-white?logo=gitpod)](https://gitpod.io/#https://github.com/gear-foundation/dapps)
-[![CI](https://img.shields.io/github/actions/workflow/status/gear-foundation/dapps/contracts.yml?logo=github&label=CI)](https://github.com/gear-foundation/dapp-template/actions/workflows/ci.yml)
 
-# Gear Template Contract
+## Deployment
 
-<!-- Description starts here -->
+1. Deploy the code of program domain
+2. Deploy the code of program identity
+3. Deploy program router
 
-A template application. Use this repository as a template when creating a new application repository.
 
-> https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template
+## Interfaces
 
-<!-- End of the description -->
 
-## Initial checklist after creating a new repository
+### Write
 
-- [ ] Change the app name in `Cargo.toml`.
-- [ ] Fix badges' links in `README.md` (replace `gear-foundation/dapp-template` with `<your_username>/<your_new_app>`).
-- [ ] Replace a description in `README.md`.
-- [ ] Remove this section.
-### 🏗️ Building
+1. create domain
 
-```sh
-cargo b --workspace
-```
 
-### ✅ Testing
+### Read
 
-Run all tests, except `gclient` ones:
-```sh
-cargo t --workspace -- --skip gclient
-```
-
-Run all tests:
-```sh
-# Download the node binary.
-cargo xtask node
-cargo t --workspace
-```
-
-### 🚀 Run CI locally (should be done before a commit)
-```sh
-cargo xtask ci
-```
-
-# License
-
-The source code is licensed under the [MIT license](LICENSE).
+1. read a source of domain

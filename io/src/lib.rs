@@ -1,7 +1,7 @@
 #![no_std]
 
 use gmeta::{In, Metadata, Out};
-pub use router::{Command, InitInput};
+pub use router::{Command, InitInput, Router};
 pub use source::{Footer, Header, Source, State};
 
 mod router;
@@ -28,5 +28,5 @@ impl Metadata for ContractMetadata {
     ///
     /// You can also specify just an output ([`Out`]) or input ([`In`]) type, if both
     /// ([`In`]) are expected like here.
-    type State = Out<State>;
+    type State = Out<Router>;
 }

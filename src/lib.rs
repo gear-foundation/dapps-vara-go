@@ -1,22 +1,34 @@
 #![no_std]
 
-use gstd::{msg, prelude::*, prog, CodeId};
+use gstd::{msg, prelude::*, prog, ActorId, CodeId};
 use template_io::*;
 
+/// The code id of the domain program.
 static mut DOMAIN_CODE_ID: Option<CodeId> = None;
 
-// static mut IDENTITY_CODE_ID: Option<CodeId> = None;
+/// The code id of the identity program.
+static mut IDENTITY_CODE_ID: Option<CodeId> = None;
 
 /// The resource of the domain.
-static mut STATE: Option<State> = None;
+static mut STATE: Option<Router> = None;
 
 // Init handler for the factory program.
 #[no_mangle]
 extern fn init() {
-    // TODO:
-    //
-    // 1. the code id of the identity program
-    // 2. the code id of the domain program
+    let payload: InitInput = msg::load().expect("Failed to load handle input");
+
+    unsafe {
+        *DOMAIN_CODE_ID
+            .as_mut()
+            .expect("Failed to get domain storage") = payload.domain;
+        *IDENTITY_CODE_ID
+            .as_mut()
+            .expect("Failed to get identity storage") = payload.identity;
+    }
+}
+
+fn domain_salt(sender: ActorId, domain: String) -> Vec<u8> {
+    [sender.as_ref().to_vec(), domain.into_bytes().to_vec()].concat()
 }
 
 // TODO:
@@ -39,13 +51,21 @@ extern fn handle() {
     match payload {
         Command::CreateDomain(config) => {
             let code_id = unsafe { DOMAIN_CODE_ID.clone().expect("code id not exist") };
-            let salt = [
-                sender.as_ref().to_vec(),
-                config.domain.into_bytes().to_vec(),
-            ]
-            .concat();
 
-            prog::create_program(code_id, salt, config.source, 0).expect("Failed to create domain");
+            let (_, pid) = prog::create_program(
+                code_id,
+                domain_salt(sender, config.domain.clone()),
+                config.source,
+                0,
+            )
+            .expect("Failed to create domain");
+
+            unsafe {
+                STATE
+                    .as_mut()
+                    .expect("Failed to load program state")
+                    .create_domain(config.domain, pid)
+            }
         }
     }
 }

@@ -1,7 +1,7 @@
 //! Types for the router
 
 use crate::Source;
-use gstd::{ActorId, Decode, Encode, String, TypeInfo};
+use gstd::{collections::BTreeMap, ActorId, CodeId, Decode, Encode, String, TypeInfo, Vec};
 
 /// The init input for the router program.
 #[derive(Encode, Decode, TypeInfo, PartialEq, Eq, Debug, Clone)]
@@ -9,10 +9,10 @@ use gstd::{ActorId, Decode, Encode, String, TypeInfo};
 #[scale_info(crate = gstd::scale_info)]
 pub struct InitInput {
     /// The code id of the identity program.
-    pub identity: ActorId,
+    pub identity: CodeId,
 
     /// The code id of the domain program.
-    pub domain: ActorId,
+    pub domain: CodeId,
 }
 
 /// Avaiable commands for the router program.
@@ -43,3 +43,40 @@ pub struct CommandCreateDomain {
 // pub struct CommandCreateIdentity {
 //
 // }
+
+/// Available labels
+#[derive(Encode, Decode, TypeInfo, PartialEq, Eq, Debug, Clone)]
+#[codec(crate = gstd::codec)]
+#[scale_info(crate = gstd::scale_info)]
+pub enum Label {
+    Vara,
+    Profile,
+}
+
+/// Metadata of domain.
+#[derive(Encode, Decode, TypeInfo, PartialEq, Eq, Debug, Clone)]
+#[codec(crate = gstd::codec)]
+#[scale_info(crate = gstd::scale_info)]
+pub struct DomainMeta {
+    pub labels: Vec<Label>,
+    pub pid: ActorId,
+}
+
+/// Router state
+#[derive(Encode, Decode, TypeInfo, PartialEq, Eq, Debug, Clone)]
+#[codec(crate = gstd::codec)]
+#[scale_info(crate = gstd::scale_info)]
+pub struct Router(pub BTreeMap<String, DomainMeta>);
+
+impl Router {
+    /// Create a dummy domain
+    pub fn create_domain(&mut self, domain: String, pid: ActorId) {
+        self.0.insert(
+            domain,
+            DomainMeta {
+                pid,
+                labels: Default::default(),
+            },
+        );
+    }
+}
