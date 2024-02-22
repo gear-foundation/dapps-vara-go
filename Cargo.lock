@@ -120,6 +120,24 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "0942ffc6dcaadf03badf6e6a2d0228460359d5e34b57ccdc720b7382dfbd5ec5"
 
 [[package]]
+name = "alpha-io"
+version = "0.1.0"
+dependencies = [
+ "gmeta",
+ "gstd",
+]
+
+[[package]]
+name = "alpha-state"
+version = "0.1.0"
+dependencies = [
+ "alpha-io",
+ "gear-wasm-builder",
+ "gmeta",
+ "gstd",
+]
+
+[[package]]
 name = "android-tzdata"
 version = "0.1.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -6261,6 +6279,15 @@ name = "valuable"
 version = "0.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "830b7e5d4d90034032940e4ace0d9a9a057e7a45cd94e6c007832e39edb82f6d"
+
+[[package]]
+name = "vara-go-alpha"
+version = "0.1.0"
+dependencies = [
+ "alpha-io",
+ "gear-wasm-builder",
+ "gstd",
+]
 
 [[package]]
 name = "version_check"

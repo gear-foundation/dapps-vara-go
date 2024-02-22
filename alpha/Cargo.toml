@@ -1,0 +1,13 @@
+[package]
+name = "vara-go-alpha"
+version.workspace = true
+edition.workspace = true
+publish.workspace = true
+
+[dependencies]
+gstd.workspace = true
+alpha-io.workspace = true
+
+[build-dependencies]
+alpha-io.workspace = true
+gear-wasm-builder.workspace = true
