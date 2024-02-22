@@ -72,3 +72,14 @@ export const mocked1 = `   <header class="header">
 
 </main>
 `;
+
+export const mocked2 = `   <header class="header">
+<h1 class="header-title">Some another site</h1>
+</header>
+
+<main class="main-content">
+
+Some another webpage
+
+</main>
+`;

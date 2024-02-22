@@ -9,8 +9,8 @@ import styles from "./SearchedMurkup.module.scss";
 // import mockedPic from "@/assets/icons/mocked-pic.jpg";
 import { SEARCH_ATOM } from "@/features/main/atoms";
 import { Footer } from "@/components/Footer";
-import { mocked, mocked1 } from "./mockedHtml";
-import { styles as st, styles1 } from "./mockedStyles";
+import { mocked, mocked1, mocked2 } from "./mockedHtml";
+import { styles as st, styles1, styles2 } from "./mockedStyles";
 import { useParams } from "react-router-dom";
 
 export const SearchedMurkup = () => {
@@ -22,6 +22,30 @@ export const SearchedMurkup = () => {
     setSearchValue("");
   }, []);
 
+  const defineStyles = (id: string | undefined) => {
+    if (id === "vara.kara-blog") {
+      return st;
+    }
+
+    if (id === "vara.travel-blog") {
+      return styles1;
+    }
+
+    return styles2;
+  };
+
+  const defineHtml = (id: string | undefined) => {
+    if (id === "vara.kara-blog") {
+      return mocked;
+    }
+
+    if (id === "vara.travel-blog") {
+      return mocked1;
+    }
+
+    return mocked2;
+  };
+
   const cssAppliedContent = (styles: string, body: string) => `
       ${styles}
       ${body}
@@ -32,10 +56,7 @@ export const SearchedMurkup = () => {
       <div
         className={styles.content}
         dangerouslySetInnerHTML={{
-          __html: cssAppliedContent(
-            id === "vara.kara-blog" ? st : styles1,
-            id === "vara.kara-blog" ? mocked : mocked1
-          ),
+          __html: cssAppliedContent(defineStyles(id), defineHtml(id)),
         }}
       ></div>
       <Footer />

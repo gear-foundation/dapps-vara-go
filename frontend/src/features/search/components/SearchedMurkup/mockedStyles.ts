@@ -137,3 +137,29 @@ export const styles1 = `
   }
   </style>
 `;
+
+export const styles2 = `
+  <style>
+  .header {
+    background: #333;
+    color: #fff;
+    padding: 20px;
+  }
+  
+  .header-title {
+    margin-bottom: 0;
+  }
+  
+
+  .main-content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 48px;
+    font-weight: 600;
+  }
+
+  </style>
+`;
