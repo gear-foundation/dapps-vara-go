@@ -1,0 +1,44 @@
+.container {
+    padding: 50px 100px;
+    background: #efefef;
+}
+
+.searchResults {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    overflow: auto;
+    width: 60%;
+}
+
+.result {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    height: 90px;
+
+    &Name {
+        font-size: 20px;
+        font-weight: 500;
+        border: none;
+        outline: none;
+        background: transparent;
+        text-overflow: ellipsis;
+        text-decoration: none;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        cursor: pointer;
+        transition: 0.2s ease all;
+
+        &:not(:visited) {
+            color: rgb(33, 33, 33);
+        }
+
+        &:hover {
+            color: #00aa83;
+        }
+    }
+}

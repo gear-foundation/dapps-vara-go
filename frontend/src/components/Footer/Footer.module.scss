@@ -1,0 +1,27 @@
+.footer {
+  height: 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 50px;
+  background: #ffffff;
+}
+
+.footerRights {
+  color: #000000;
+  font-weight: 500;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  border: none;
+  outline: none;
+  box-shadow: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.logoImage {
+  max-height: 50px;
+}

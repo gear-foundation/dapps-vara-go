@@ -1,0 +1,76 @@
+.header {
+    position: relative;
+    height: 100px;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 50px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    background: transparent;
+    cursor: pointer;
+  }
+
+  .logoImage {
+    max-height: 50px;
+  }
+
+  .headerRight {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+  }
+
+  .subheaderWrapper {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 1;
+  }
+
+  .subheader {
+    background: rgb(33, 33, 33);
+    height: 70px;
+    width: 100%;
+
+    &Menu {
+        list-style-type: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        gap: 70px;
+
+        &Item {
+            color: #ffffff;
+            text-transform: capitalize;
+            cursor: pointer;
+            transition: 0.2s ease all;
+
+            &:hover {
+              color: #00FFC4;
+
+            }
+        }
+    }
+  }
+
+  .rightButton {
+    background: transparent;
+    outline: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  .headerButton {
+    height: 30px;
+  }
